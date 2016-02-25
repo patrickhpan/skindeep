@@ -1,13 +1,13 @@
 import React from 'react'
 import {Route} from 'react-router'
-import App from './components/App'
-import Home from './components/Home'
-import NotFound from './components/NotFound'
+
+import App from './views/App'
+import Home from './views/Home'
+import NotFound from './views/NotFound'
 
 const routes = (
   <Route component={App}>
     <Route path='/' component={Home} />
-    // Put other routes here
     <Route path='*' component={NotFound} />
   </Route>
 )
