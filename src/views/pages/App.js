@@ -10,8 +10,8 @@ import {
 
 import { Link } from 'react-router';
 
-import TabLink from './components/TabLink.js';
-import DrawerLink, { hideDrawer } from './components/DrawerLink.js';
+import TabLink from '../components/TabLink.js';
+import DrawerLink, { hideDrawer } from '../components/DrawerLink.js';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 

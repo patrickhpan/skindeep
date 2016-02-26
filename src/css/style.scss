@@ -1,5 +1,6 @@
-@import "colors.scss";
 @import "globals.scss";
+@import "anims.scss";
+@import "colors.scss";
 
 /*
   General preferences
@@ -19,9 +20,11 @@ body {
   background-color: #f2f2f2;
 }
 
-.mdl-card {
-  min-height: 0!important;
-}
+// .mdl-card {
+//   min-height: 0!important;
+//   min-height: auto!important;
+//
+// }
 
 /*
   Navigation bar and drawer
@@ -199,96 +202,15 @@ $card-padding: 32px;
 
 }
 
-.TextCard.FaceCard .CardTitle {
-  height: 500px;
-  max-height: 60vh!important;
-  background: url(http://patrickpan.com/me3.jpg) top center / cover;
-  color:white;
-  h2 {
-    background: rgba(0,0,0,0.4);
-  }
-
-}
-
-// .ImageCard-Code .CardTitle {
-//   height: 0;
-//
-// }
-//
-// .ImageCard-Piano .CardTitle {
-//   height: 0;
-//   padding-bottom: 100% !important;
-//   background: url(http://patrickpan.com/piano.png) top left / cover;
-// }
-//
-// .ImageCard-Photos .CardTitle {
-//   height: 0;
-//   padding-bottom: 100% !important;
-//   background: url(http://patrickpan.com/photos.png) top left / cover;
-// }
-//
-// .ImageCard-Blog .CardTitle {
-//   height: 0;
-//   padding-bottom: 100% !important;
-//   background: url(http://patrickpan.com/blog.png) top left / cover;
-// }
-//
-// .ImageCard-Album .CardTitle {
-//   height: 0;
-//   padding-bottom: 100% !important;
-//   background: url(http://patrickpan.com/album.png) top left / cover;
-// }
+/*
+  Full cards
+  Full cards have no text and consist entirely of images.
+*/
 
 .FullCard {
   width: 100%!important;
-  /*margin:auto!important;*/
 }
 
 .FullCard .CardTitle h2 {
   margin-bottom: -100% !important;
-}
-
-.mdl-card {
-  min-height: auto!important;
-}
-
-#captcha {
-  margin: auto;
-}
-
-#captcha-btn {
-  margin: 15px auto;
-}
-$color1: #711693;
-$color2: #38c6ff;
-
-.Color1 .CardTitle {
-  background-color: $color1;
-  color: white;
-}
-.Color2 .CardTitle {
-  background-color: $color2;
-  color: white;
-}
-
-.fade-enter {
-  opacity: 0;
-}
-
-.fade-enter.fade-enter-active {
-
-  animation: in 0.5s normal forwards;
-}
-
-.fade-leave {
-  display: none;
-}
-
-@keyframes in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }

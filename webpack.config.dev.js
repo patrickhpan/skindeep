@@ -38,6 +38,9 @@ module.exports = {
     }, {
       test: /\.s?css$/,
       loader: 'style!css!sass'
+    }, {
+      test: /\.woff2$/,
+      loader: 'url-loader?limit=100000'
     }]
   },
   _hotPort: 8000
