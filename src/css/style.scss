@@ -2,6 +2,14 @@
 @import "anims.scss";
 @import "colors.scss";
 
+
+@mixin unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+
 /*
   General preferences
   Links should not be underlined. Links of color InheritColor should change color.
@@ -213,4 +221,30 @@ $card-padding: 32px;
 
 .FullCard .CardTitle h2 {
   margin-bottom: -100% !important;
+}
+
+
+.TextCard.MainCard .CardTitle {
+  height: 500px;
+  max-height: 60vh!important;
+  background: url(http://patrickpan.com/skindeep.bg.jpg) top center / cover;
+  color:white;
+  h2 {
+    background: rgba(0,0,0,0.4);
+  }
+
+}
+
+#dropzone {
+  margin: auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  div {
+    flex: 1;
+    text-align: center;
+  }
+}
+.margin-center {
+  margin: auto;
 }

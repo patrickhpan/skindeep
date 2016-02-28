@@ -10,7 +10,7 @@ import { Router, hashHistory as history } from 'react-router'
 import attachFastClick from 'fastclick'
 import routes from './views/routes'
 
-attachFastClick.attach(document.body)
+// attachFastClick.attach(document.body)
 
 // Expose globally
 window.React = React

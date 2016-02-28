@@ -19,20 +19,20 @@ class App extends React.Component {
     render() {
       return (
         <Layout fixedHeader>
-          <Header scroll title={<Link className="NoDecorate InheritColor" to={`/`}>Title</Link>} className="DesktopNav MobileDrawer">
+          <Header scroll title={<Link className="NoDecorate InheritColor" to={`/`}>SkinDeep</Link>} className="DesktopNav MobileDrawer">
             <Navigation>
               <TabLink _isIndex to={`/`}>Home</TabLink>
-              <TabLink to={`/a`}>Link</TabLink>
-              <TabLink to={`/b`}>Link</TabLink>
-              <TabLink to={`/c`}>Link</TabLink>
+              <TabLink to={`/submit`}>Submit an Image</TabLink>
+              <TabLink to={`/diagnosis`}>Retrieve Diagnosis</TabLink>
+              <TabLink to={`/about`}>About Us</TabLink>
             </Navigation>
           </Header>
-          <Drawer title={<Link className="NoDecorate InheritColor" to={`/`} onClick={hideDrawer}>Title</Link>}>
+          <Drawer title={<Link className="NoDecorate InheritColor" to={`/`} onClick={hideDrawer}>SkinDeep</Link>}>
             <Navigation>
               <DrawerLink _isIndex to={`/`}>Home</DrawerLink>
-              <DrawerLink to={`/a`}>Link</DrawerLink>
-              <DrawerLink to={`/b`}>Link</DrawerLink>
-              <DrawerLink to={`/c`}>Link</DrawerLink>
+              <DrawerLink to={`/submit`}>Submit an Image</DrawerLink>
+              <DrawerLink to={`/diagnosis`}>Retrieve Diagnosis</DrawerLink>
+              <DrawerLink to={`/about`}>About Us</DrawerLink>
             </Navigation>
           </Drawer>
           <ReactCSSTransitionGroup
