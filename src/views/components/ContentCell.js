@@ -21,8 +21,7 @@ const createButton = (data, i) => {
   var colored = data.colored && true;
   var innerEl = createLink(data.link, data.text);
   var id = data.id ? data.id : i;
-
-  return <Button colored={colored} id={id} key={i} onClick={(e) => {e.target.children[0].click(); e.target.children[0].click(); console.log(e.target.children[0])}}>{innerEl}</Button>
+  return <Button colored={colored} id={id} key={i} onClick={(e) => {if(e.target.tagName != "a") {e.target.children[0].click(); e.target.children[0].click(); console.log(e.target.children[0])}}}>{innerEl}</Button>
 }
 
 const ContentCell = (props) => {

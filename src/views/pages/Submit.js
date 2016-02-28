@@ -29,32 +29,33 @@ class Submit extends React.Component {
   }
   onClickSubmit() {
     var reader = new window.FileReader();
-    console.log(this.state.file[this.state.file.length-1]);
     reader.readAsDataURL(this.state.file[this.state.file.length-1]);
     reader.onloadend = function() {
+      console.log(this.state.crop)
       $.ajax({
-        url: 'http://localhost:3001/submit',
+        method: 'POST',
+        url: 'http://localhost:3005/submit',
         data: {
           image: reader.result,
-          crop: this.state.crop
+          x: this.state.crop.x,
+          y: this.state.crop.y,
+          w: this.state.crop.width,
+          h: this.state.crop.height,
         },
         success: function(data) {
-          this.setState({token: <div><br/>Your submission token is: <pre>{data}</pre></div>})
-        }.bind(this),
-        error: function() {
-          this.setState({token: <div><br/>Your submission token is: <pre>abc</pre></div>})
+          this.setState({token: <div><br/>This is your token. Remember it to retrieve your results!<pre>{data.token.split("-").map(x => x[0].toUpperCase() + x.slice(1)).join(" ")}</pre></div>, crop:null})
         }.bind(this)
       })
     }.bind(this)
   }
   render() {
     if(this.state.file.length !== 0) {
-      var before = "Please crop your image such that the mole is centered and occupies around half of the image."
+      var before = <div className="ContentLine">Please tap and drag to crop your image such that the mole is centered and occupies around half of the image."</div>
       var inner = <ReactCrop keepSelection onChange={this.onChangeCrop.bind(this)} src={this.state.file[this.state.file.length-1].preview} />;
       var after = <Button disabled={this.state.crop == null} className="margin-center" raised colored ripple onClick={this.onClickSubmit.bind(this)}>{this.state.crop === null? "Crop Required" : "Submit!" }</Button>
     } else {
-      var before = "Submit an image here for a diagnosis. After submission, you'll receive a token and be able to claim your diagnosis. Then, please crop your image such that the mole is centered and occupies around half of the image."
-      var inner = <Dropzone id="dropzone" onDrop={this.onDrop.bind(this)}>
+      var before = <div className="ContentLine">"Submit an image here for a diagnosis. After submission, you'll receive a token and be able to claim your diagnosis. Then, please crop your image such that the mole is centered and occupies around half of the image."</div>
+      var inner = <Dropzone id="dropzone" accept="image/jpeg" onDrop={this.onDrop.bind(this)}>
         <div>Tap to select an image!</div>
       </Dropzone>
       var after = null;

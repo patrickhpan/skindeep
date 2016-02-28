@@ -235,6 +235,16 @@ $card-padding: 32px;
 
 }
 
+.TextCard.DiagCard .CardTitle {
+  height: 500px;
+  max-height: 60vh!important;
+  color:white;
+  h2 {
+    background: rgba(0,0,0,0.4);
+  }
+
+}
+
 #dropzone {
   margin: auto;
   cursor: pointer;
@@ -247,4 +257,19 @@ $card-padding: 32px;
 }
 .margin-center {
   margin: auto;
+}
+
+#token-entry {
+  display: flex;
+  align-items: center;
+  width:100%;
+  & > * {
+    margin: 10px;
+  }
+  & > div {
+    flex: 3;
+  }
+  & > button {
+    flex: 1;
+  }
 }

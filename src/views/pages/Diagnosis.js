@@ -17,12 +17,66 @@ class Diagnosis extends React.Component {
   constructor() {
     super();
     this.state = {
+      token: null,
+      ready: false,
       image: null,
       diagnosis: null,
-      text: null
+      text: []
     }
   }
+  onKeyDownToken(e) {
+    if(e.keyCode == 13) this.onClickRetrieve();
+    var token = e.target.value
+    if(token.match(/^\w+\s+\w+\s*$/)) {
+      this.setState({
+        ready: true,
+        token: token
+      })
+    } else {
+      this.setState({ready: false})
+    }
+  }
+  onClickRetrieve() {
+    this.setState({})
+    $.ajax({
+      method: 'GET',
+      url: 'http://localhost:3005/results',
+      data: {
+        token: this.state.token
+      },
+      success: function(data) {
+        this.setState({
+          ready: false,
+          image: data.image,
+          diagnosis: data.diagnosis,
+          text: data.text
+        })
+
+      }.bind(this),
+      error: function() {
+        this.setState({
+          ready: false,
+          image: "http://patrickpan.com/me3.jpg",
+          diagnosis: "Benign Growth",
+          text: ["You don't have cancer. Nice.", "Keep wearing sunscreen!"]
+        })
+
+      }.bind(this),
+
+    })
+  }
   render() {
+    if(this.state.diagnosis !== null) {
+      var diagnosis =
+      <Cell col={12}>
+        <Card shadow={4} className="TextCard DiagCard">
+          <CardTitle className="CardTitle" style={{background: `url(${this.state.image}) top center / cover`}}>{this.state.diagnosis}</CardTitle>
+          <CardText>
+            {this.state.text.map(x => <div className="ContentLine">{x}</div>)}
+          </CardText>
+        </Card>
+      </Cell>
+    } else var diagnosis = null;
     return <Grid className="MainGrid">
       <Cell col={12}>
         <Card shadow={4} className="TextCard">
@@ -32,79 +86,21 @@ class Diagnosis extends React.Component {
           <CardText>
             <div id="token-entry">
               <Textfield
+                onKeyDown={this.onKeyDownToken.bind(this)}
                 label="Your Token"
-                error="A token consists of two adjectives and an animal."
+                error="A token consists of an adjective and an animal."
+                pattern="\w+\s+\w+\s*"
                 floatingLabel
               />
+              <Button ripple colored raised disabled={this.state.ready === false} onClick={this.onClickRetrieve.bind(this)}>Retrieve</Button>
             </div>
           </CardText>
         </Card>
       </Cell>
+      {diagnosis}
+
     </Grid>
   }
 }
 
-class Submit extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      file: [],
-      crop: null,
-      token: null
-    };
-  }
-  onDrop(file) {
-    this.setState({file: file});
-  }
-  onChangeCrop(crop) {
-    this.setState({crop: crop});
-  }
-  onClickSubmit() {
-    var reader = new window.FileReader();
-    console.log(this.state.file[this.state.file.length-1]);
-    reader.readAsDataURL(this.state.file[this.state.file.length-1]);
-    reader.onloadend = function() {
-      $.ajax({
-        url: 'http://localhost:3001/submit',
-        data: {
-          image: reader.result,
-          crop: this.state.crop
-        },
-        success: function(data) {
-          this.setState({token: <div><br/>Your submission token is: <pre>{data}</pre></div>})
-        }.bind(this),
-        error: function() {
-          this.setState({token: <div><br/>Your submission token is: <pre>abc</pre></div>})
-        }.bind(this)
-      })
-    }.bind(this)
-  }
-  render() {
-    if(this.state.file.length !== 0) {
-      var before = "Please crop your image such that the mole is centered and occupies around half of the image."
-      var inner = <ReactCrop keepSelection onChange={this.onChangeCrop.bind(this)} src={this.state.file[this.state.file.length-1].preview} />;
-      var after = <Button disabled={this.state.crop == null} className="margin-center" raised colored ripple onClick={this.onClickSubmit.bind(this)}>{this.state.crop === null? "Crop Required" : "Submit!" }</Button>
-    } else {
-      var before = "Submit an image here for a diagnosis. After submission, you'll receive a token and be able to claim your diagnosis. Then, please crop your image such that the mole is centered and occupies around half of the image."
-      var inner = <Dropzone id="dropzone" onDrop={this.onDrop.bind(this)}>
-        <div>Tap to select an image!</div>
-      </Dropzone>
-      var after = null;
-    }
-    return <Grid className="MainGrid">
-      <Cell col={12}>
-        <Card shadow={4} className="TextCard">
-          <CardTitle className="CardTitle">Submit an Image</CardTitle>
-          <CardText>
-            {before}<br/>
-            {inner}
-            {after}
-            {this.state.token}
-          </CardText>
-        </Card>
-      </Cell>
-    </Grid>
-  }
-}
-
-export default Submit;
+export default Diagnosis;
