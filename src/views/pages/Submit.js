@@ -34,7 +34,7 @@ class Submit extends React.Component {
       console.log(this.state.crop)
       $.ajax({
         method: 'POST',
-        url: 'http://skindeep.patrickpan.com:3005/submit',
+        url: 'http://skindeep.patrickpan.com:3010/submit',
         data: {
           image: reader.result,
           x: this.state.crop.x,

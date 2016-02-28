@@ -40,7 +40,7 @@ class Diagnosis extends React.Component {
     this.setState({})
     $.ajax({
       method: 'GET',
-      url: 'http://skindeep.patrickpan.com:3005/results',
+      url: 'http://skindeep.patrickpan.com:3010/results',
       data: {
         token: this.state.token
       },
